@@ -172,7 +172,16 @@ class Text(Artist):
         self._x, self._y = x, y
 
         if color is None: color = rcParams['text.color']
-        if fontproperties is None: fontproperties=FontProperties()
+        if fontproperties is None:
+            self._fontproperties = FontProperties()
+            if 'text.family' in rcParams: self.set_family(rcParams['text.family'])
+            if 'text.size' in rcParams: self.set_size(rcParams['text.size'])
+            if 'text.style' in rcParams: self.set_style(rcParams['text.style'])
+            if 'text.stretch' in rcParams: self.set_stretch(rcParams['text.stretch'])
+            if 'text.slant' in rcParams: self.set_slant(rcParams['text.slant'])
+            if 'text.weight' in rcParams: self.set_weight(rcParams['text.weight'])
+            if 'text.variant' in rcParams: self.set_variant(rcParams['text.variant'])
+
         elif is_string_like(fontproperties): fontproperties=FontProperties(fontproperties)
 
         self.set_path_effects(path_effects)
@@ -1804,6 +1813,14 @@ class Annotation(Text, _AnnotationBase):
                                                **arrowprops)
         else:
             self.arrow_patch = None
+
+        if 'annotation.family' in rcParams: self.set_family(rcParams['annotation.family'])
+        if 'annotation.size' in rcParams: self.set_size(rcParams['annotation.size'])
+        if 'annotation.style' in rcParams: self.set_style(rcParams['annotation.style'])
+        if 'annotation.stretch' in rcParams: self.set_stretch(rcParams['annotation.stretch'])
+        if 'annotation.slant' in rcParams: self.set_slant(rcParams['annotation.slant'])
+        if 'annotation.weight' in rcParams: self.set_weight(rcParams['annotation.weight'])
+        if 'annotation.variant' in rcParams: self.set_variant(rcParams['annotation.variant'])
 
 
     def contains(self,event):
