@@ -1814,6 +1814,7 @@ class Annotation(Text, _AnnotationBase):
         else:
             self.arrow_patch = None
 
+        if 'annotation.color' in rcParams: self.set_color(rcParams['annotation.color'])
         if 'annotation.family' in rcParams: self.set_family(rcParams['annotation.family'])
         if 'annotation.size' in rcParams: self.set_size(rcParams['annotation.size'])
         if 'annotation.style' in rcParams: self.set_style(rcParams['annotation.style'])
