@@ -173,7 +173,7 @@ class Text(Artist):
 
         if color is None: color = rcParams['text.color']
         if fontproperties is None:
-            self._fontproperties = FontProperties()
+            fontproperties = FontProperties()
             if 'text.family' in rcParams: self.set_family(rcParams['text.family'])
             if 'text.size' in rcParams: self.set_size(rcParams['text.size'])
             if 'text.style' in rcParams: self.set_style(rcParams['text.style'])
