@@ -476,12 +476,9 @@ defaultParams = {
     'polaraxes.grid'        : [True, validate_bool],   # display polar grid or not
   
     # axes3d props
-    'axes3d.grid'           : [True, validate_bool],   # display 3d grid
     'axes3d.axisbelow'        : [False, validate_bool],
     'axes3d.hold'             : [True, validate_bool],
     'axes3d.facecolor'        : ['w', validate_color],    # background color; white
-    'axes3d.edgecolor'        : ['k', validate_color],    # edge color; black
-    'axes3d.linewidth'        : [1.0, validate_float],    # edge linewidth
     'axes3d.titlesize'        : ['large', validate_fontsize], # fontsize of the axes title
     'axes3d.grid'             : [False, validate_bool],   # display grid or not
     'axes3d.labelsize'        : ['medium', validate_fontsize], # fontsize of the x any y labels
