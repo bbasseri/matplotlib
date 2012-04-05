@@ -37,7 +37,13 @@ class Colorbar(mcolorbar.Colorbar):
         ax.update_datalim(xy)
         ax.set_xlim(*ax.dataLim.intervalx)
         ax.set_ylim(*ax.dataLim.intervaly)
-        self.outline = mlines.Line2D(xy[:, 0], xy[:, 1], color=mpl.rcParams['axes.edgecolor'],
+	
+	
+	if ax._is3D:
+		self.outline = mlines.Line2D(xy[:, 0], xy[:, 1], color=mpl.rcParams['axes3d.edgecolor'],
+                                     linewidth=mpl.rcParams['axes3d.linewidth'])
+	else:
+       		self.outline = mlines.Line2D(xy[:, 0], xy[:, 1], color=mpl.rcParams['axes.edgecolor'],
                                      linewidth=mpl.rcParams['axes.linewidth'])
         ax.add_artist(self.outline)
         self.outline.set_clip_box(None)

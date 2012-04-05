@@ -349,7 +349,7 @@ class Axes(martist.Artist):
     where *ax* is the :class:`Axes` instance.
     """
     name = "rectilinear"
-
+    _is3D = False
     _shared_x_axes = cbook.Grouper()
     _shared_y_axes = cbook.Grouper()
 
@@ -452,14 +452,27 @@ class Axes(martist.Artist):
         # this call may differ for non-sep axes, eg polar
         self._init_axis()
 
-        if axisbg is None: axisbg = rcParams['axes.facecolor']
-        self._axisbg = axisbg
+	if axisbg is None:
+		axisbg = rcParams['axes.facecolor'] # non-3d default
+		if self._is3D:
+			axisbg = rcParams['axes3d.facecolor']
+		
+
+	self._axisbg = axisbg
         self._frameon = frameon
-        self._axisbelow = rcParams['axes.axisbelow']
+
+	if self._is3D:
+       		self._axisbelow = rcParams['axes3d.axisbelow']
+	else:
+		self._axisbelow = rcParams['axes.axisbelow']
 
         self._rasterization_zorder = -30000
 
-        self._hold = rcParams['axes.hold']
+	if self._is3D:
+		self._hold = rcParams['axes3d.hold']
+	else:
+        	self._hold = rcParams['axes.hold']
+
         self._connected = {} # a dict from events to (id, func)
         self.cla()
         # funcs used to format x and y - fall back on major formatters
@@ -874,7 +887,7 @@ class Axes(martist.Artist):
 
         self._get_lines = _process_plot_var_args(self)
         self._get_patches_for_fill = _process_plot_var_args(self, 'fill')
-
+	
         self._gridOn = rcParams['axes.grid']
         self.lines = []
         self.patches = []
@@ -3177,8 +3190,13 @@ class Axes(martist.Artist):
             :meth:`text`
                 for information on how override and the optional args work
         """
+	fontsize = None
+	if self._is3D:
+		fontsize = rcParams['axes3d.titlesize']
+	else:
+		fontsize = rcParams['axes.titlesize']
         default = {
-            'fontsize':rcParams['axes.titlesize'],
+            'fontsize': fontsize,
             'verticalalignment' : 'baseline',
             'horizontalalignment' : 'center'
             }

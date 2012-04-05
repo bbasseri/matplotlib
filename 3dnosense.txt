@@ -1,0 +1,7 @@
+-axes3d.edgecolor
+-axes3d.linewidth
+-axes3d.axesbelow
+-axes3d.hold
+-axes3d.formatter.use_locale
+-axes3d.unicode_minus
+-axes3d.color_cycle - too difficult i think.

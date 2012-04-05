@@ -74,9 +74,14 @@ class Axes3D(Axes):
         self.view_init(self.initial_elev, self.initial_azim)
         self._ready = 0
 
+	self._is3D = True
+
         Axes.__init__(self, fig, rect,
                       frameon=True,
                       *args, **kwargs)
+
+
+
         # Disable drawing of axes by base class
         Axes.set_axis_off(self)
         # Enable drawing of axes by Axes3D class

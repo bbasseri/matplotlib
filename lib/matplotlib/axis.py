@@ -1561,11 +1561,21 @@ class XAxis(Axis):
     def _get_label(self):
         # x in axes coords, y in display coords (to be updated at draw
         # time by _update_label_positions)
+
+	if self.axes._is3D:
+		lweight = rcParams['axes3d.labelweight']
+		lsize = rcParams['axes3d.labelsize']
+		lcolor = rcParams['axes3d.labelcolor']
+	else:
+		lweight = rcParams['axes.labelweight']
+		lsize = rcParams['axes.labelsize']
+		lcolor = rcParams['axes.labelcolor']	
+
         label = mtext.Text(x=0.5, y=0,
             fontproperties = font_manager.FontProperties(
-                               size=rcParams['axes.labelsize'],
-                               weight=rcParams['axes.labelweight']),
-            color = rcParams['axes.labelcolor'],
+                               size=lsize,
+                               weight=lweight),
+            color = lcolor,
             verticalalignment='top',
             horizontalalignment='center',
             )
