@@ -149,9 +149,12 @@ def set_default_color_cycle(clist):
               Set rcParams['axes.color_cycle'] directly.
 
     """
-    rcParams['axes.color_cycle'] = clist
-    warnings.warn("Set rcParams['axes.color_cycle'] directly",
-                                                    DeprecationWarning)
+    if self.axes._is3D:
+        rcParams['axes3d.color_cycle'] = clist
+        warnings.warn("Set rcParams['axes3d.color_cycle'] directly", DeprecationWarning)
+    else:
+        rcParams['axes.color_cycle'] = clist
+        warnings.warn("Set rcParams['axes.color_cycle'] directly", DeprecationWarning)
 
 
 class _process_plot_var_args:
@@ -174,7 +177,10 @@ class _process_plot_var_args:
 
     def set_color_cycle(self, clist=None):
         if clist is None:
-            clist = rcParams['axes.color_cycle']
+            if self.axes._is3D:
+                clist = rcParams['axes3d.color_cycle']
+            else:
+                clist = rcParams['axes.color_cycle']
         self.color_cycle = itertools.cycle(clist)
 
     def __call__(self, *args, **kwargs):
@@ -454,21 +460,21 @@ class Axes(martist.Artist):
 
 	if axisbg is None:
 		axisbg = rcParams['axes.facecolor'] # non-3d default
-		if self._is3D:
+		if self.axes._is3D:
 			axisbg = rcParams['axes3d.facecolor']
 		
 
 	self._axisbg = axisbg
         self._frameon = frameon
 
-	if self._is3D:
+	if self.axes._is3D:
        		self._axisbelow = rcParams['axes3d.axisbelow']
 	else:
 		self._axisbelow = rcParams['axes.axisbelow']
 
         self._rasterization_zorder = -30000
 
-	if self._is3D:
+	if self.axes._is3D:
 		self._hold = rcParams['axes3d.hold']
 	else:
         	self._hold = rcParams['axes.hold']
@@ -3191,7 +3197,7 @@ class Axes(martist.Artist):
                 for information on how override and the optional args work
         """
 	fontsize = None
-	if self._is3D:
+	if self.axes._is3D:
 		fontsize = rcParams['axes3d.titlesize']
 	else:
 		fontsize = rcParams['axes.titlesize']
