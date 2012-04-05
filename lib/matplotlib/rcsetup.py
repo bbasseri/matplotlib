@@ -474,7 +474,28 @@ defaultParams = {
                                                          # line colors
 
     'polaraxes.grid'        : [True, validate_bool],   # display polar grid or not
+  
+    # axes3d props
     'axes3d.grid'           : [True, validate_bool],   # display 3d grid
+    'axes3d.axisbelow'        : [False, validate_bool],
+    'axes3d.hold'             : [True, validate_bool],
+    'axes3d.facecolor'        : ['w', validate_color],    # background color; white
+    'axes3d.edgecolor'        : ['k', validate_color],    # edge color; black
+    'axes3d.linewidth'        : [1.0, validate_float],    # edge linewidth
+    'axes3d.titlesize'        : ['large', validate_fontsize], # fontsize of the axes title
+    'axes3d.grid'             : [False, validate_bool],   # display grid or not
+    'axes3d.labelsize'        : ['medium', validate_fontsize], # fontsize of the x any y labels
+    'axes3d.labelweight'      : ['normal', str], # fontsize of the x any y labels
+    'axes3d.labelcolor'       : ['k', validate_color],    # color of axis label
+    'axes3d.formatter.limits' : [[-7, 7], validate_nseq_int(2)],
+                               # use scientific notation if log10
+                               # of the axis range is smaller than the
+                               # first or larger than the second
+    'axes3d.formatter.use_locale' : [False, validate_bool], # Use the current locale to format ticks
+    'axes3d.unicode_minus'        : [True, validate_bool],
+    'axes3d.color_cycle'      : [['b','g','r','c','m','y','k'],
+                                    validate_colorlist], # cycle of plot
+                                                         # line colors
 
     #legend properties
     'legend.fancybox'         : [False,validate_bool],
